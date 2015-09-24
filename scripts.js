@@ -16,11 +16,11 @@ app.Todo = Backbone.Model.extend({
 		}
 	},
 
-	// toggle: function () {
-	// 	this.save({
-	// 		completed: !this.get('completed')
-	// 	});
-	// }
+	toggle: function () {
+		this.save({
+			completed: !this.get('completed')
+		});
+	}
 });
 
 
@@ -62,7 +62,7 @@ app.TodoView = Backbone.View.extend({
 		'dblclick label': 'edit',
 		'keypress .edit': 'updateOnEnter',
 		'blur .edit': 'close',
-		// 'click .toggle': 'toggleCompleted',
+		'change .toggle': 'toggleCompleted',
 		'click .destroy': 'destroy'
 	},
 
@@ -87,9 +87,10 @@ app.TodoView = Backbone.View.extend({
 		}
 	},
 
-	// toggleCompleted: function () {
-	// 	this.model.toggle();
-	// },
+	toggleCompleted: function () {
+		this.$el.toggleClass('complete')
+		this.model.toggle();
+	},
 
 	destroy: function () {
 		this.model.destroy();
