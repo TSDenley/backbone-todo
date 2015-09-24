@@ -3,14 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Backbone Todos</title>
+	<base href="http://localhost:8000/">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <section id="todoapp">
 	<header id="header">
-		<h1 class="h1">Todos</h1>
+		<h1 class="site-title h1"><a href="/">Todos</a></h1>
 		<input type="text" id="new-todo" placeholder="What needs to be done?">
+		<div class="filters">
+			Fliters:
+			<a href="#/">All</a> |
+			<a href="#/pending">Show pending</a> |
+			<a href="#/completed">Show completed</a>
+		</div>
 	</header>
 	<section id="main">
 		<ul id="todo-list"></ul>

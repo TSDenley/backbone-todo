@@ -1,3 +1,8 @@
+.site-title a {
+	text-decoration: none;
+	color: #222;
+}
+
 .edit {
 	display: none;
 }
@@ -13,3 +18,17 @@
 .complete {
 	text-decoration: line-through;
 }
+
+.filters a {
+	color: #666;
+	text-decoration: none;
+}
+
+	.filters a:hover {
+		color: #222;
+		text-decoration: underline;
+	}
+
+	.filters a.active {
+		color: #000;
+	}
