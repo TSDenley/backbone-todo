@@ -1,10 +1,12 @@
 (function($, window, document, undefined) {
 
+'use strict';
+
 var app = {}; // App namespace
 
 
 /**
-* Model
+* Models
 */
 app.Todo = Backbone.Model.extend({
 	defaults: {
@@ -12,12 +14,18 @@ app.Todo = Backbone.Model.extend({
 			title: '',
 			completed: false
 		}
-	}
+	},
+
+	// toggle: function () {
+	// 	this.save({
+	// 		completed: !this.get('completed')
+	// 	});
+	// }
 });
 
 
 /**
-* Collection
+* Collections
 */
 app.TodoList = Backbone.Collection.extend({
 	model: app.Todo,
@@ -29,8 +37,10 @@ app.todoList = new app.TodoList();
 
 
 /**
-* Task view
+* Views
 */
+
+// Task view
 app.TodoView = Backbone.View.extend({
 
 	tagName: 'li',
@@ -45,12 +55,15 @@ app.TodoView = Backbone.View.extend({
 
 	initialize: function () {
 		this.model.on('change', this.render, this);
+		this.model.on('destroy', this.remove, this);
 	},
 
 	events: {
 		'dblclick label': 'edit',
 		'keypress .edit': 'updateOnEnter',
-		'blur .edit': 'close'
+		'blur .edit': 'close',
+		// 'click .toggle': 'toggleCompleted',
+		'click .destroy': 'destroy'
 	},
 
 	edit: function () {
@@ -72,14 +85,20 @@ app.TodoView = Backbone.View.extend({
 		if ( event.which === 13 ) {
 			this.close();
 		}
+	},
+
+	// toggleCompleted: function () {
+	// 	this.model.toggle();
+	// },
+
+	destroy: function () {
+		this.model.destroy();
 	}
 
 });
 
 
-/**
-* Main App view
-*/
+// Main App view
 app.AppView = Backbone.View.extend({
 
 	el: '#todoapp',
