@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Backbone Getting Started</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -22,7 +23,8 @@
 	<div class="view">
 		<label>
 			<input type="checkbox" class="toggle">
-			<%- title %>
+			<input type="text" class="edit" value="<%- title %>">
+			<span class="task-title"><%- title %></span>
 		</label>
 	</div>
 </script>

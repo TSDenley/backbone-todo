@@ -33,15 +33,45 @@ app.todoList = new app.TodoList();
 */
 app.TodoView = Backbone.View.extend({
 
-	tagName: 'li', // Wrap in a list item
+	tagName: 'li',
 
-	// Grab the template from `index.html`
 	template: _.template($('#item-template').html()),
 
-	// Render the template with the data from the Model
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
+		this.input = this.$('.edit');
 		return this;
+	},
+
+	initialize: function () {
+		this.model.on('change', this.render, this);
+	},
+
+	events: {
+		'dblclick label': 'edit',
+		'keypress .edit': 'updateOnEnter',
+		'blur .edit': 'close'
+	},
+
+	edit: function () {
+		this.$el.addClass('editing');
+		this.input.focus();
+	},
+
+	close: function () {
+		var value = this.input.val().trim();
+
+		if ( value ) {
+			this.model.save({title: value});
+		}
+
+		this.$el.removeClass('editing');
+	},
+
+	updateOnEnter: function (event) {
+		if ( event.which === 13 ) {
+			this.close();
+		}
 	}
 
 });

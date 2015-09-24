@@ -1,0 +1,11 @@
+.edit {
+	display: none;
+}
+
+.editing .task-title {
+	display: none;
+}
+
+.editing .edit {
+	display: inline;
+}
